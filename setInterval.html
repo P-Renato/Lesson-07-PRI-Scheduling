@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>emojis</title>
+
+</head>
+
+
+
+<body>
+
+    <style>
+        html, body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            background-color: blue;
+
+        }
+
+
+        div {
+            border: green solid 3px;
+            padding: 1em;
+            border-radius: 12px;
+            background: linear-gradient(90deg, rgba(144, 238, 144, 0.644), rgba(255, 182, 193, 0.685));
+        }
+
+
+
+    </style>
+    <div id="emoji" style="font-size: 4rem;">😀</div>
+
+
+    <script>
+    const emojis = ["😀", "🚀", "🎉", "🍕", "🐱", "⚡", "🌈", "🔥", "🦄", "🎈"];
+    const emojiDiv = document.getElementById("emoji");
+
+    function changeEmoji() {
+    const randomIndex = Math.floor(Math.random() * emojis.length);
+    emojiDiv.textContent = emojis[randomIndex];
+    }
+
+    setInterval(changeEmoji, 5000);
+    </script>
+</body>
+
+   
+
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debouncing</title>
+</head>
+<body>
+    <!--
+    Debouncing 
+    A technique tha tprevents a function from being called too frequently 
+    It's extremely common in search boxes.
+    Resson for debouncing = making a request to the server for every input
+    change is waay too heavy 
+    -->
+
+    <input type="text" name="" id="">
+
+    <ul>
+
+    </ul>
+
+    <script>
+        // We are using API for repos
+
+        const input = document.querySelector('input');
+
+
+        /*
+            The doSearch function (async function) perforns a search query
+            against the gitHub api amd display the results dynamically in the <ul>
+        */
+
+        async function doSearch(value) {
+            // preparing the url for our request
+            const url = `https://api.github.com/search/repositories?q=${value}`;
+            // make request and get response
+            const response = await fetch(url);
+            //Parsing response
+            const data = await response.json();
+
+            const ul = document.querySelector('ul');
+            ul.innerHTML = '';
+            console.log(data);
+
+            // We iterate over 'items' array, grab the full_name, value and append it to the ul
+
+            data.items.forEach((item) => {
+                const li = document.createElement('li');
+                li.textContent = item.full_name;
+                ul.appendChild(li);                
+            });
+
+            if (timer) {
+                clearTimeout(timer);
+            }
+        }
+
+        let timer;
+
+        //Triggering the function
+        input.addEventListener('input', function() {
+            const value = input.value;
+
+            if (timer) {
+                clearTimeout(timer)
+            }
+
+            timer = setTimeout(() => {
+                doSearch(value);
+            }, 500)
+
+            
+
+        })
+    </script>
+</body>
+</html>
